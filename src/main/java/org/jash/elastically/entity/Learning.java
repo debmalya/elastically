@@ -3,6 +3,9 @@ package org.jash.elastically.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.jash.elastically.api.server.LearningApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -13,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document(indexName = "learning")
 public class Learning {
+	private static final Logger LOG = LoggerFactory.getLogger(Learning.class);
 	@Id
 	private String id;
 
@@ -66,5 +70,26 @@ public class Learning {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Learning(String id, String topicName, List<String> url, String description, LocalDate addedOn) {
+		super();
+		this.id = id;
+		this.topicName = topicName;
+		this.url = url;
+		this.description = description;
+		this.addedOn = addedOn;
+		LOG.info("~~~~ All property constructor called ~~~~");
+	}
+	
+	public Learning() {
+	}
+
+	@Override
+	public String toString() {
+		return "Learning [id=" + id + ", topicName=" + topicName + ", url=" + url + ", description=" + description
+				+ ", addedOn=" + addedOn + "]";
+	}
+	
+	
 
 }
